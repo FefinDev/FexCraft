@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080c13">
+<meta name="description" content="Descargá FexCraft, el launcher creado por Fefin.">
+<title>FexCraft — Descarga oficial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #080c13;
+  --panel: #0e1520;
+  --line: #202d3e;
+  --text: #f3f7fc;
+  --muted: #91a1b7;
+  --blue: #0080ff;
+  --cyan: #50adff;
+  --green: #53d6a0;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% -20%, #0080ff2e, transparent 48%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+a { color: inherit; }
+
+.wrap {
+  width: min(1080px, calc(100% - 40px));
+  margin: auto;
+}
+
+.topbar {
+  height: 76px;
+  border-bottom: 1px solid #8fa6c71f;
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: #0080ff22;
+  border: 1px solid #50adff55;
+  color: var(--cyan);
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.brand-name {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.brand-sub {
+  display: block;
+  margin-top: 3px;
+  color: #71839b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-links a {
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.nav-links a:hover { color: white; }
+
+.github-link {
+  border: 1px solid var(--line);
+  padding: 10px 13px;
+  border-radius: 11px;
+}
+
+.hero {
+  padding: 82px 0 52px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid #50adff38;
+  background: #0080ff12;
+  border-radius: 999px;
+  color: #9bcfff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px #53d6a080;
+}
+
+h1 {
+  margin: 25px auto 17px;
+  font-size: clamp(38px, 7vw, 70px);
+  line-height: 1.04;
+  letter-spacing: -4px;
+  font-weight: 800;
+}
+
+h1 span { color: var(--cyan); }
+
+.hero-copy {
+  max-width: 590px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.download-card {
+  max-width: 700px;
+  margin: 35px auto 0;
+  padding: 23px;
+  text-align: left;
+  border: 1px solid #5991d140;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #101c2c, #0c131e);
+  box-shadow: 0 24px 80px #0003;
+}
+
+.release-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.release-label {
+  color: #8496ae;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+}
+
+.version {
+  margin-top: 8px;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -.8px;
+  overflow-wrap: anywhere;
+}
+
+.release-meta {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px 15px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pill {
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: #53d6a018;
+  border: 1px solid #53d6a03d;
+  color: #83e8bc;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.download-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 23px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  min-height: 47px;
+  padding: 0 17px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  flex: 1;
+  background: var(--blue);
+  color: white;
+}
+
+.btn-primary:hover { background: #168aff; }
+
+.btn-secondary {
+  background: #111c2a;
+  border-color: #2a394d;
+  color: #dce8f7;
+}
+
+.status {
+  margin: 13px 2px 0;
+  color: #7f91a9;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.status.error { color: #ff8989; }
+.status.success { color: #83e8bc; }
+
+.section { padding: 42px 0 76px; }
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.section-kicker {
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 8px 0 0;
+  font-size: 25px;
+  letter-spacing: -.8px;
+}
+
+.section-desc {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.releases {
+  display: grid;
+  gap: 10px;
+}
+
+.release-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #0e1520c9;
+}
+
+.release-row:hover { border-color: #314965; }
+
+.release-row-main { min-width: 0; }
+
+.release-row-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.latest-tag {
+  color: #8bdcba;
+  background: #53d6a017;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.release-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 8px;
+  color: #7f91a9;
+  font-size: 11px;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  min-height: 37px;
+  padding: 0 12px;
+  border: 1px solid #2a394d;
+  border-radius: 10px;
+  background: #111c2a;
+  color: #cbd9e9;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.icon-btn:hover { border-color: var(--cyan); }
+
+.empty {
+  padding: 26px;
+  border: 1px dashed #2b3b50;
+  border-radius: 15px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.feature {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #0e152099;
+}
+
+.feature-icon {
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #50adff30;
+  background: #0080ff15;
+  border-radius: 11px;
+  color: var(--cyan);
+  font-size: 19px;
+}
+
+.feature h3 {
+  margin: 15px 0 7px;
+  font-size: 14px;
+}
+
+.feature p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.notice {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  color: #8496ae;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.notice a { color: #9bcfff; }
+
+footer {
+  border-top: 1px solid #8fa6c71f;
+  padding: 23px 0 30px;
+  color: #708199;
+  font-size: 11px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.footer-links { display: flex; gap: 16px; }
+.footer-links a { color: #8798ae; text-decoration: none; }
+
+@media (max-width: 700px) {
+  .wrap { width: calc(100% - 28px); }
+  .topbar { height: 68px; }
+  .nav-links { gap: 10px; }
+  .nav-links .optional { display: none; }
+  .hero { padding: 60px 0 35px; }
+  h1 { letter-spacing: -2.5px; }
+  .hero-copy { font-size: 14px; }
+  .download-card { padding: 17px; border-radius: 17px; }
+  .version { font-size: 21px; }
+  .download-actions { flex-direction: column; }
+  .btn { width: 100%; }
+  .section { padding: 35px 0 55px; }
+  .section-heading { align-items: flex-start; flex-direction: column; }
+  .release-row { align-items: flex-start; padding: 14px; }
+  .row-actions { flex-direction: column; }
+  .features { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <span class="brand-icon">F</span>
+      <span>
+        <span class="brand-name">FexCraft</span>
+        <span class="brand-sub">BY FEFIN</span>
+      </span>
+    </a>
+
+    <nav class="nav-links">
+      <a class="optional" href="#descargas">Descargas</a>
+      <a class="optional" href="#caracteristicas">Características</a>
+      <a class="github-link" href="https://github.com/FefinDev/FexCraft"
+         target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> Descarga oficial · FexCraft</div>
+
+      <h1>Tu Minecraft.<br><span>A tu manera.</span></h1>
+
+      <p class="hero-copy">
+        El launcher creado por Fefin. Descargá la última versión disponible
+        directamente desde GitHub Releases.
+      </p>
+
+      <article class="download-card">
+        <div class="release-head">
+          <div>
+            <div class="release-label">Última versión estable</div>
+            <div class="version" id="latest-version">Conectando con GitHub…</div>
+            <div class="release-meta">
+              <span id="release-date">Consultando fecha</span>
+              <span id="asset-count">Buscando instalador</span>
+            </div>
+          </div>
+          <span class="pill" id="release-badge">Cargando</span>
+        </div>
+
+        <div class="download-actions">
+          <a class="btn btn-primary" id="download-button"
+             href="https://github.com/FefinDev/FexCraft/releases/latest"
+             target="_blank" rel="noopener noreferrer">
+            ↓ <span id="download-label">Ver última Release</span>
+          </a>
+
+          <a class="btn btn-secondary"
+             href="https://github.com/FefinDev/FexCraft/releases"
+             target="_blank" rel="noopener noreferrer">
+            Todas las versiones ↗
+          </a>
+        </div>
+
+        <p class="status" id="main-status" role="status" aria-live="polite">
+          Consultando la API pública de GitHub…
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="descargas">
+    <div class="wrap">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">Historial de versiones</div>
+          <h2>Todas las releases</h2>
+          <p class="section-desc">
+            Versiones anteriores y archivos publicados.
+          </p>
+        </div>
+
+        <a class="btn btn-secondary"
+           href="https://github.com/FefinDev/FexCraft/releases"
+           target="_blank" rel="noopener noreferrer">
+          Ver en GitHub ↗
+        </a>
+      </div>
+
+      <div class="releases" id="releases-list" aria-live="polite">
+        <div class="empty">Cargando historial de versiones…</div>
+      </div>
+
+      <div class="notice">
+        <strong>Descargas oficiales:</strong> los archivos se obtienen directamente
+        de las publicaciones de
+        <a href="https://github.com/FefinDev/FexCraft"
+           target="_blank" rel="noopener noreferrer">FefinDev/FexCraft</a>.
+        Si una release no contiene instaladores, podrás abrirla en GitHub.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="caracteristicas" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-kicker">El launcher</div>
+      <h2>Diseñado para ir al grano.</h2>
+      <p class="section-desc">Descargas sencillas, sin cuentas ni backend.</p>
+
+      <div class="features">
+        <article class="feature">
+          <div class="feature-icon">↯</div>
+          <h3>Acceso directo</h3>
+          <p>Encontrá la versión reciente sin buscar archivos manualmente.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">▤</div>
+          <h3>Historial completo</h3>
+          <p>Accedé a versiones anteriores y a sus archivos disponibles.</p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">✓</div>
+          <h3>Origen oficial</h3>
+          <p>Los enlaces apuntan directamente a GitHub Releases.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>© <span id="year"></span> FexCraft · Hecho por Fefin.</div>
+    <div class="footer-links">
+      <a href="https://github.com/FefinDev/FexCraft"
+         target="_blank" rel="noopener noreferrer">Repositorio</a>
+      <a href="https://github.com/FefinDev/FexCraft/issues"
+         target="_blank" rel="noopener noreferrer">Reportar un problema</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+const OWNER = "FefinDev";
+const REPO = "FexCraft";
+
+const API_URL =
+  `https://api.github.com/repos/${OWNER}/${REPO}/releases?per_page=100`;
+
+const RELEASES_URL =
+  `https://github.com/${OWNER}/${REPO}/releases`;
+
+const LATEST_URL =
+  `https://github.com/${OWNER}/${REPO}/releases/latest`;
+
+const $ = id => document.getElementById(id);
+
+$("year").textContent = new Date().getFullYear();
+
+/*
+ * Selecciona automáticamente el mejor archivo descargable.
+ * Prioridad:
+ * 1. Instaladores .exe y .msi.
+ * 2. Archivos ZIP/7Z/RAR.
+ * 3. Otros assets disponibles.
+ */
+function chooseAsset(assets) {
+  if (!Array.isArray(assets)) return null;
+
+  const usable = assets.filter(asset =>
+    asset &&
+    typeof asset.name === "string" &&
+    typeof asset.browser_download_url === "string"
+  );
+
+  if (usable.length === 0) return null;
+
+  function score(asset) {
+    const name = asset.name.toLowerCase();
+    let points = 0;
+
+    if (/\.exe$/i.test(name)) points += 100;
+    if (/\.msi$/i.test(name)) points += 100;
+    if (/setup|installer|install/i.test(name)) points += 30;
+    if (/fexcraft/i.test(name)) points += 15;
+    if (/portable/i.test(name)) points += 10;
+    if (/\.(zip|7z|rar)$/i.test(name)) points += 20;
+
+    if (/\.(sha256|sha512|sig|asc|txt|json|yml|yaml|blockmap)$/i.test(name)) {
+      points -= 100;
+    }
+
+    if (/checksums|symbols|debug|\.pdb$/i.test(name)) {
+      points -= 100;
+    }
+
+    return points;
+  }
+
+  return usable.slice().sort((a, b) => score(b) - score(a))[0];
+}
+
+function formatDate(value) {
+  if (!value) return "Fecha no disponible";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "Fecha no disponible";
+  }
+
+  return new Intl.DateTimeFormat("es-AR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  }).format(date);
+}
+
+function formatSize(bytes) {
+  if (!Number.isFinite(bytes) || bytes < 0) return "";
+
+  if (bytes < 1024) return `${bytes} B`;
+
+  const units = ["KB", "MB", "GB"];
+  let size = bytes / 1024;
+  let index = 0;
+
+  while (size >= 1024 && index < units.length - 1) {
+    size /= 1024;
+    index++;
+  }
+
+  return `${size.toFixed(1)} ${units[index]}`;
+}
+
+function setStatus(message, type = "") {
+  const element = $("main-status");
+
+  element.textContent = message;
+  element.className = "status";
+
+  if (type) {
+    element.classList.add(type);
+  }
+}
+
+function showLatest(release) {
+  if (!release) {
+    $("latest-version").textContent = "Sin releases publicadas";
+    $("release-date").textContent = "Sin publicaciones";
+    $("asset-count").textContent = "No hay archivos";
+    $("release-badge").textContent = "Sin releases";
+    $("download-label").textContent = "Abrir GitHub Releases";
+    $("download-button").href = RELEASES_URL;
+
+    setStatus(
+      "El repositorio no tiene releases publicadas todavía. " +
+      "Cuando publiques una, aparecerá automáticamente."
+    );
+
+    return;
+  }
+
+  const asset = chooseAsset(release.assets);
+
+  $("latest-version").textContent =
+    release.name || release.tag_name || "Versión sin nombre";
+
+  $("release-date").textContent =
+    "Publicado " + formatDate(release.published_at || release.created_at);
+
+  const assets = Array.isArray(release.assets) ? release.assets : [];
+
+  $("asset-count").textContent =
+    `${assets.length} archivo${assets.length === 1 ? "" : "s"} disponible${assets.length === 1 ? "" : "s"}`;
+
+  $("release-badge").textContent =
+    release.prerelease ? "Pre-release" : "Disponible";
+
+  $("download-button").href =
+    asset ? asset.browser_download_url : (release.html_url || LATEST_URL);
+
+  $("download-label").textContent =
+    asset ? `Descargar ${asset.name}` : "Ver archivos de la release";
+
+  if (asset) {
+    const size = asset.size ? ` · ${formatSize(asset.size)}` : "";
+
+    setStatus(
+      `Descarga directa: ${asset.name}${size}. ` +
+      "El archivo proviene de GitHub Releases.",
+      "success"
+    );
+  } else {
+    setStatus(
+      "Esta release no tiene un instalador adjunto. " +
+      "Abrí la publicación en GitHub para ver sus archivos."
+    );
+  }
+}
+
+function createReleaseRow(release, index) {
+  const row = document.createElement("article");
+  row.className = "release-row";
+
+  const main = document.createElement("div");
+  main.className = "release-row-main";
+
+  const title = document.createElement("div");
+  title.className = "release-row-title";
+
+  title.appendChild(
+    document.createTextNode(
+      release.name || release.tag_name || "Versión sin nombre"
+    )
+  );
+
+  if (index === 0) {
+    const tag = document.createElement("span");
+    tag.className = "latest-tag";
+    tag.textContent = "Más reciente";
+    title.appendChild(tag);
+  } else if (release.prerelease) {
+    const tag = document.createElement("span");
+    tag.className = "latest-tag";
+    tag.textContent = "Pre-release";
+    title.appendChild(tag);
+  }
+
+  const meta = document.createElement("div");
+  meta.className = "release-row-meta";
+
+  const date = document.createElement("span");
+  date.textContent = formatDate(
+    release.published_at || release.created_at
+  );
+
+  const tagName = document.createElement("span");
+  tagName.textContent = release.tag_name
+    ? `Tag: ${release.tag_name}`
+    : "Sin tag";
+
+  const asset = chooseAsset(release.assets);
+
+  const file = document.createElement("span");
+
+  file.textContent = asset
+    ? `${asset.name}${asset.size ? " · " + formatSize(asset.size) : ""}`
+    : "Sin instalador adjunto";
+
+  meta.append(date, tagName, file);
+  main.append(title, meta);
+
+  const actions = document.createElement("div");
+  actions.className = "row-actions";
+
+  if (asset) {
+    const download = document.createElement("a");
+
+    download.className = "icon-btn";
+    download.href = asset.browser_download_url;
+    download.textContent = "Descargar";
+    download.title = `Descargar ${asset.name}`;
+    download.setAttribute("aria-label", `Descargar ${asset.name}`);
+
+    actions.appendChild(download);
+  }
+
+  const details = document.createElement("a");
+
+  details.className = "icon-btn";
+  details.href = release.html_url || RELEASES_URL;
+  details.target = "_blank";
+  details.rel = "noopener noreferrer";
+  details.textContent = "Detalles ↗";
+  details.setAttribute("aria-label", "Ver release en GitHub");
+
+  actions.appendChild(details);
+  row.append(main, actions);
+
+  return row;
+}
+
+function renderReleases(releases) {
+  const container = $("releases-list");
+  container.replaceChildren();
+
+  const published = releases.filter(release =>
+    release && !release.draft
+  );
+
+  if (published.length === 0) {
+    const empty = document.createElement("div");
+
+    empty.className = "empty";
+    empty.textContent =
+      "Todavía no hay versiones publicadas. " +
+      "Cuando publiques una release en GitHub, aparecerá acá.";
+
+    container.appendChild(empty);
+    return;
+  }
+
+  published.slice(0, 30).forEach((release, index) => {
+    container.appendChild(createReleaseRow(release, index));
+  });
+}
+
+function showLoadError(message) {
+  $("latest-version").textContent = "No se pudo cargar";
+  $("release-date").textContent = "API de GitHub no disponible";
+  $("asset-count").textContent = "Consulta fallida";
+  $("release-badge").textContent = "Sin conexión";
+  $("download-label").textContent = "Abrir GitHub Releases";
+  $("download-button").href = LATEST_URL;
+
+  setStatus(message, "error");
+
+  const container = $("releases-list");
+  container.replaceChildren();
+
+  const empty = document.createElement("div");
+  empty.className = "empty";
+  empty.textContent =
+    "No se pudo cargar el historial desde la API. ";
+
+  const link = document.createElement("a");
+  link.href = RELEASES_URL;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = "Ver releases directamente en GitHub";
+  link.style.color = "#9bcfff";
+
+  empty.appendChild(link);
+  container.appendChild(empty);
+}
+
+async function loadReleases() {
+  try {
+    const response = await fetch(API_URL, {
+      headers: {
+        Accept: "application/vnd.github+json"
+      },
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        throw new Error(
+          "GitHub no encontró el repositorio o sus releases. " +
+          "Comprobá que el repositorio exista y sea público."
+        );
+      }
+
+      if (response.status === 403 || response.status === 429) {
+        throw new Error(
+          "GitHub limitó temporalmente las consultas. " +
+          "Probá de nuevo más tarde."
+        );
+      }
+
+      throw new Error(`GitHub respondió con estado ${response.status}.`);
+    }
+
+    const releases = await response.json();
+
+    if (!Array.isArray(releases)) {
+      throw new Error("GitHub devolvió una respuesta inesperada.");
+    }
+
+    const published = releases.filter(release =>
+      release && !release.draft
+    );
+
+    // Preferimos la release estable más reciente.
+    // Si solo hay pre-releases, mostramos la primera disponible.
+    const latest =
+      published.find(release => !release.prerelease) ||
+      published[0] ||
+      null;
+
+    showLatest(latest);
+    renderReleases(releases);
+
+  } catch (error) {
+    console.error("Error cargando FexCraft Releases:", error);
+
+    showLoadError(
+      error.message ||
+      "Ocurrió un error inesperado al consultar GitHub."
+    );
+  }
+}
+
+loadReleases();
+</script>
+</body>
+</html>
